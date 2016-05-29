@@ -8,8 +8,8 @@ public class PortModel {
     public int id;
     public String name;
 
-    private final Map<Integer, Long> boatAvailability = new HashMap<>();
-    private final List<Ferry> boats = new ArrayList<>();
+    final Map<Integer, Long> boatAvailability = new HashMap<>();
+    final List<Ferry> boats = new ArrayList<>();
 
     public PortModel(Port port) {
         id = port.id;
@@ -24,18 +24,20 @@ public class PortModel {
     }
 
     public Ferry getNextAvailable(long time) {
+        Ferry result = null;
         for (Map.Entry<Integer, Long> entry : boatAvailability.entrySet()) {
             if (time >= entry.getValue()) {
                 boatAvailability.remove(entry.getKey());
                 for (Ferry boat : boats) {
                     if (boat.id == entry.getKey()) {
                         boats.remove(boat);
-                        return boat;
+                        result = boat;
+                        break;
                     }
                 }
-                return null;
+                break;
             }
         }
-        return null;
+        return result;
     }
 }

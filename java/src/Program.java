@@ -13,7 +13,7 @@ public class Program {
     private static JourneyBookingService bookingService;
     public static Ports ports;
     private static FerryAvailabilityService ferryService;
-    private static PrintStream out;
+    public static PrintStream out;
 
     public static void wireUp() {
         TimeTables timeTables = new TimeTables();

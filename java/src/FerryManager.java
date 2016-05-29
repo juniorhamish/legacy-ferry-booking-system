@@ -3,14 +3,6 @@ import java.util.List;
 public class FerryManager {
 
     public static FerryJourney createFerryJourney(List<PortModel> ports, TimeTableEntry timetable) {
-        if (ports == null) {
-            return null;
-        }
-
-        if (timetable == null) {
-            return null;
-        }
-
         FerryJourney fj = new FerryJourney();
         for (PortModel port : ports) {
             if (port.id == timetable.originId) {

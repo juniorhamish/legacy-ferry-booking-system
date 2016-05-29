@@ -11,7 +11,7 @@ public class PortManager {
         this.ferries = ferries;
     }
 
-    public List<PortModel> PortModels() {
+    public List<PortModel> portModels() {
         List<PortModel> allPorts = new ArrayList<>();
         for (Port port : ports.all()) {
             allPorts.add(new PortModel(port));
@@ -19,7 +19,7 @@ public class PortManager {
         for (Ferry ferry : ferries.all()) {
             for (PortModel port : allPorts) {
                 if (port.id == ferry.homePortId) {
-                    port.addBoat(10, ferry);
+                    port.addBoat(0, ferry);
                 }
             }
         }

@@ -14,7 +14,8 @@ public class FerryAvailabilityService {
     }
 
     public Ferry nextFerryAvailableFrom(int portId, long time) {
-        List<PortModel> ports = portManager.PortModels();
+        Ferry result = null;
+        List<PortModel> ports = portManager.portModels();
         List<TimeTableEntry> allEntries = new ArrayList<TimeTableEntry>();
         for (TimeTable tt : timeTables.all()) {
             allEntries.addAll(tt.entries);
@@ -35,13 +36,14 @@ public class FerryAvailabilityService {
             if (entry.originId == portId) {
                 if (entry.time >= time) {
                     if (ferry != null) {
-                        return ferry.ferry;
+                        result = ferry.ferry;
+                        break;
                     }
                 }
             }
         }
 
-        return null;
+        return result;
     }
 
     private static void boatReady(TimeTableEntry timetable, PortModel destination, FerryJourney ferryJourney) {
